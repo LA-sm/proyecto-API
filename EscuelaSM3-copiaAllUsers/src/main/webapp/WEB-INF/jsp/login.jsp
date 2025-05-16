@@ -8,76 +8,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Estilo moderno con animaciones -->
     <style>
         body {
-            background-color: #f4f4f9;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            background: linear-gradient(135deg, #c9d6ff, #e2e2e2);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .form-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            margin: auto;
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            animation: float 8s ease-in-out infinite alternate;
+            z-index: 0;
         }
 
-        .form-container h2 {
-            text-align: center;
-            margin-bottom: 20px;
+        .shape1 { width: 120px; height: 120px; top: 10%; left: 10%; animation-delay: 0s; }
+        .shape2 { width: 200px; height: 200px; bottom: 15%; right: 12%; animation-delay: 2s; }
+        .shape3 { width: 80px; height: 80px; bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-30px) rotate(360deg); }
         }
 
-        .btn-primary {
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            padding: 50px 40px;
             width: 100%;
-            padding: 10px;
+            max-width: 420px;
+            z-index: 2;
+            animation: fadeSlideIn 1.2s ease;
+        }
+
+        @keyframes fadeSlideIn {
+            0% { transform: translateY(-60px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        h2 {
+            text-align: center;
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            animation: popIn 1s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .form-control {
-            border-radius: 5px;
+            border-radius: 12px;
+            padding: 12px;
+            border: none;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: transform 0.2s ease;
         }
 
-        .form-link {
+        .form-control:focus {
+            transform: scale(1.02);
+            box-shadow: 0 0 12px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-login {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            width: 100%;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(to right, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        .text-link {
             text-align: center;
             margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .text-link a {
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .text-link a:hover {
+            color: #ffdd57;
         }
 
         .alert {
+            margin-top: 20px;
             text-align: center;
-            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Iniciar Sesión</h2>
-    <form class="row g-3" action="/anonimo/formularioLogin" method="post">
-        <div class="col-md-12">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required placeholder="Introduce tu correo electrónico">
-        </div>
-        <div class="col-md-12">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" name="password" required placeholder="Introduce tu contraseña">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-        </div>
-    </form>
+    <!-- Fondos animados -->
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
 
-    <div class="form-link">
-        <p>¿No tienes cuenta? <a href="/anonimo/loginRegistro?source=login">Regístrate aquí</a></p>
+    <!-- Tarjeta de login -->
+    <div class="glass-card">
+        <h2>Iniciar Sesión</h2>
+
+        <form class="row g-3" action="/anonimo/formularioLogin" method="post">
+            <div class="col-md-12">
+                <input type="email" class="form-control" id="email" name="email" required placeholder="Introduce tu correo electrónico">
+            </div>
+            <div class="col-md-12">
+                <input type="password" class="form-control" id="password" name="password" required placeholder="Introduce tu contraseña">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-login">Iniciar Sesión</button>
+            </div>
+        </form>
+
+        <div class="text-link">
+            ¿No tienes cuenta? <a href="/anonimo/loginRegistro?source=login">Regístrate aquí</a>
+        </div>
+
+        <c:if test="${not empty mensaje}">
+            <div class="alert" role="alert">
+                <c:out value="${mensaje}" />
+            </div>
+        </c:if>
     </div>
-</div>
 
-<c:if test="${not empty mensaje}">
-    <div class="alert alert-warning" role="alert">
-        <c:out value="${mensaje}" />
-    </div>
-</c:if>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
